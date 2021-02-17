@@ -29,6 +29,7 @@ namespace Strava
             });
 
             builder.Services.AddScoped<IStravaService, StravaService>();
+            builder.Services.AddScoped<IChartService, ChartService>();
 
             await builder.Build().RunAsync();
         }

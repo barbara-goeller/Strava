@@ -10,17 +10,41 @@
 }
 else
 {
-    <h3>Statistics</h3>
-    // TODO: Berechnungen in Code auslagern
-    <p>Overall distance: @UserActivities.Sum(activity => activity.Distance).ToString("0.00") km</p>
+    <h2>Activities</h2>
 
-    <h3>Activities</h3>
-
-    <div style="margin-bottom: 2em;">
+    <div class="mb-4">
         <label for="timeRange">Time range: </label>
         <DateRangePicker id="timeRange" @bind-StartDate="StartDate" @bind-EndDate="EndDate"
                          Culture="@(System.Globalization.CultureInfo.GetCultureInfo("de-DE"))"
                          OnRangeSelect="OnDateRangeSelect" />
+    </div>
+
+    <div class="container-fluid mb-4" style="height: 25vh">
+        <div class="row">
+            <div class="col text-center">Count of activities: @_activityCount</div>
+            <div class="col text-center">Overall distance: @_totalDistance.ToString("0.00") km</div>
+            <div class="col text-center">Overall duration: @TimeSpan.FromMinutes(_totalDuration).ToString(@"hh\:mm\:ss") </div>
+            <div class="col text-center">
+                AIT-Challenge distance: @_aitLaufChallengeDistance.ToString("0.00") km 
+                    <sup>
+                        <span class="badge badge-pill badge-secondary" data-toggle="tooltip" data-placement="top" title="The challenge includes all activities of type Hike, Run, Walk or Ride. Thereby there is a conversion ratio of 0.23 for riding distances."><i class="oi oi-info"></i></span>
+                    </sup>
+            </div>
+        </div>
+        <div class="row" style="height: 90%">
+            <div class="col">
+                <Chart Config="_countChartConfig" @ref="_countChart"></Chart>
+            </div>
+            <div class="col">
+                <Chart Config="_durationChartConfig" @ref="_durationChart"></Chart>
+            </div>
+            <div class="col">
+                <Chart Config="_distanceChartConfig" @ref="_distanceChart"></Chart>
+            </div>
+            <div class="col text-center mt-5">
+                <img src="images/AIT_Logo.jpg"/>
+            </div>
+        </div>
     </div>
 
     <table class="table">
@@ -43,7 +67,6 @@ else
                     <td>@activity.Distance.ToString("0.00") km</td>
                     <td>@TimeSpan.FromMinutes(activity.MovingTime).ToString(@"hh\:mm\:ss")</td>
                 </tr>
-
             }
         </tbody>
     </table>
