@@ -7,6 +7,7 @@
     {
         private float _distance;
         private float _movingTime;
+        private float _averageSpeed;
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
@@ -34,8 +35,19 @@
             set => _movingTime = value / 60;
         }
 
+        /// <summary>
+        /// The average speed comes from the API as meter/seconds, we want min/km
+        /// The calculation is the following:
+        ///   m/s * 3,6 = km/h, 
+        ///   3600/(km/h) = s/km, 
+        ///   s/km : 60 = min/km     ==> x m/s = (1000/x)/60 min/km = 16,66666667/x min/km         
+        /// </summary>
         [JsonPropertyName("average_speed")]
-        public float AverageSpeed { get; set; } // meters/second
+        public float AverageSpeed
+        {
+            get => _averageSpeed;
+            set => _averageSpeed = (1000 / value) / 60;
+        }
 
         public override string ToString()
         {

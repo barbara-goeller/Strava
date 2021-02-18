@@ -56,6 +56,7 @@ else
                 <th>Type</th>
                 <th>Distance</th>
                 <th>Duration</th>
+                <th>Speed</th>
             </tr>
         </thead>
         <tbody>
@@ -67,6 +68,7 @@ else
                     <td>@activity.Type</td>
                     <td>@activity.Distance.ToString("0.00") km</td>
                     <td>@TimeSpan.FromMinutes(activity.MovingTime).ToString(@"hh\:mm\:ss")</td>
+                    <td>@TimeSpan.FromMinutes(activity.AverageSpeed).ToString(@"mm\:ss") /km </td>
                 </tr>
             }
         </tbody>
