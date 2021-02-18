@@ -22,13 +22,13 @@ else
     <div class="container-fluid mb-4" style="height: 25vh">
         <div class="row">
             <div class="col text-center">Count of activities: @_activityCount</div>
-            <div class="col text-center">Overall distance: @_totalDistance.ToString("0.00") km</div>
             <div class="col text-center">Overall duration: @TimeSpan.FromMinutes(_totalDuration).ToString(@"hh\:mm\:ss") </div>
+            <div class="col text-center">Overall distance: @_totalDistance.ToString("0.00") km</div>
             <div class="col text-center">
-                AIT-Challenge distance: @_aitLaufChallengeDistance.ToString("0.00") km 
-                    <sup>
-                        <span class="badge badge-pill badge-secondary" data-toggle="tooltip" data-placement="top" title="The challenge includes all activities of type Hike, Run, Walk or Ride. Thereby there is a conversion ratio of 0.23 for riding distances."><i class="oi oi-info"></i></span>
-                    </sup>
+                AIT-Challenge distance: @_aitLaufChallengeDistance.ToString("0.00") km
+                <sup>
+                    <span class="badge badge-pill badge-secondary" data-toggle="tooltip" data-placement="top" title="The challenge includes all activities of type Hike, Run, Walk or Ride. Thereby there is a conversion ratio of 0.23 for riding distances."><i class="oi oi-info"></i></span>
+                </sup>
             </div>
         </div>
         <div class="row" style="height: 90%">

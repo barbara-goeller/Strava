@@ -71,9 +71,9 @@
             Dictionary<string, float> activityTypesWithDistances = activityGroupsByType.ToDictionary(group => group.Key.ToString(), group => group.Sum(a => a.Distance));
             Dictionary<string, float> activityTypesWithDuration = activityGroupsByType.ToDictionary(group => group.Key.ToString(), group => group.Sum(a => a.MovingTime));
 
-            _distanceChartConfig = ChartService.DrawPieChart("Activity distance by type", new SortedDictionary<string, float>(activityTypesWithDistances));
+            _distanceChartConfig = ChartService.DrawPieChart("Overall distance by type", new SortedDictionary<string, float>(activityTypesWithDistances));
             _countChartConfig = ChartService.DrawPieChart("Activity count by type", new SortedDictionary<string, int>(activityTypesWithCount));
-            _durationChartConfig = ChartService.DrawPieChart("Activity duration by type", new SortedDictionary<string, float>(activityTypesWithDuration));
+            _durationChartConfig = ChartService.DrawPieChart("Overall duration by type", new SortedDictionary<string, float>(activityTypesWithDuration));
         }
 
         public void OnDateRangeSelect(DateRange dateRange)
