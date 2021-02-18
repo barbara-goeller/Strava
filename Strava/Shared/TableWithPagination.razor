@@ -1,0 +1,48 @@
+﻿@namespace Strava.Shared
+@typeparam T
+
+@if (!InputList.Any())
+{
+    <div class="none-indicator">(none)</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            @HeaderDisplay
+        </thead>
+        <tbody>
+            @foreach (T item in CurrentDisplay)
+            {
+                @ItemDisplay(item)
+            }
+        </tbody>
+    </table>
+
+    @if (TotalPages() > 1)
+    {
+        <div class="pager-display text-center">
+            @if (CurrentPage == 1)
+            {
+                <button disabled><span class="oi oi-media-skip-backward"></span></button>
+                <button disabled><span class="oi oi-media-step-backward"></span></button>
+            }
+            else
+            {
+                <button @onclick="@MoveFirst" title="Move First"><span class="oi oi-media-skip-backward"></span></button>
+                <button @onclick="@MoveBack" title="Move Back"><span class="oi oi-media-step-backward"></span></button>
+            }
+            <span class="ml-2 mr-2">@CurrentPage of @TotalPages() </span>
+            @if (!AtLastPage())
+            {
+                <button @onclick="@MoveNext" title="Move Next"><span class="oi oi-media-step-forward"></span></button>
+                <button @onclick="@MoveLast" title="Move Last"><span class="oi oi-media-skip-forward"></span></button>
+            }
+            else
+            {
+                <button disabled><span class="oi oi-media-step-forward"></span></button>
+                <button disabled><span class="oi oi-media-skip-forward"></span></button>
+            }
+        </div>
+    }
+}
