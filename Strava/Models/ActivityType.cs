@@ -1,14 +1,45 @@
 ﻿namespace Strava.Models
 {
-    // Full list of activities: https://developers.strava.com/docs/reference/#api-models-ActivityType
+    // From https://developers.strava.com/docs/reference/#api-models-ActivityType
     public enum ActivityType
     {
+        AlpineSki,
+        BackcountrySki,
+        Canoeing,
         Crossfit,
+        EBikeRide,
+        Elliptical,
+        Golf,
+        Handcycle,
         Hike,
+        IceSkate,
+        InlineSkate,
+        Kayaking,
+        Kitesurf,
+        NordicSki,
         Ride,
+        RockClimbing,
+        RollerSki,
+        Rowing,
         Run,
+        Sail,
+        Skateboard,
+        Snowboard,
+        Snowshoe,
+        Soccer,
+        StairStepper,
+        StandUpPaddling,
+        Surfing,
         Swim,
+        Velomobile,
+        VirtualRide,
+        VirtualRun,
         Walk,
-        Workout
+        WeightTraining,
+        Wheelchair,
+        Windsurf,
+        Workout,
+        Yoga
     }
 }
+
