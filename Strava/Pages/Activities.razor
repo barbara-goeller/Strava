@@ -3,6 +3,7 @@
 @inherits AuthenticationBase
 
 @using BlazorDateRangePicker
+@using System.Globalization
 
 @if (UserActivities == null)
 {
@@ -15,7 +16,7 @@ else
     <div class="mb-4">
         <label for="timeRange">Time range: </label>
         <DateRangePicker id="timeRange" @bind-StartDate="StartDate" @bind-EndDate="EndDate"
-                         Culture="@(System.Globalization.CultureInfo.GetCultureInfo("de-DE"))"
+                         Culture="@(CultureInfo.GetCultureInfo("de-DE"))"
                          OnRangeSelect="OnDateRangeSelect" />
     </div>
 
@@ -58,10 +59,10 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var activity in UserActivities)
+            @foreach (var activity in UserActivities.OrderBy(activity => activity.StartDate))
             {
                 <tr>
-                    <td>@activity.StartDate.ToString("dd/MM/yyyy")</td>
+                    <td>@activity.StartDate.ToString("dd/MM/yyyy", CultureInfo.GetCultureInfo("de-DE"))</td>
                     <td>@activity.Name</td>
                     <td>@activity.Type</td>
                     <td>@activity.Distance.ToString("0.00") km</td>
