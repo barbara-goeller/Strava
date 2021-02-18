@@ -5,6 +5,7 @@
     using Strava.Models;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text.Json;
@@ -30,15 +31,29 @@
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _sessionStorage.GetItemAsync<string>(TokenSessionItem));
 
-            var tokenParameters = new Dictionary<string, string>
+            var activities = new List<Activity>();
+            int maxPageSize = 200;
+            int page = 1;
+            bool pageHasActivities = true;
+
+            while (pageHasActivities)
             {
-                { "after", startDate?.ToUnixTimeSeconds().ToString() },
-                { "before", endDate?.ToUnixTimeSeconds().ToString() },
-                { "per_page", "60" }
-            };
-            
-            var activitiesStream = _httpClient.GetStreamAsync($"{ActivitiesUri}{await tokenParameters.ToQueryStringAsync()}");
-            var activities = await JsonSerializer.DeserializeAsync<IEnumerable<Activity>>(await activitiesStream);
+                var tokenParameters = new Dictionary<string, string>
+                {
+                    { "after", startDate?.ToUnixTimeSeconds().ToString() },
+                    { "before", endDate?.ToUnixTimeSeconds().ToString() },
+                    { "per_page", $"{maxPageSize}" },
+                    { "page", $"{page}" }
+                };
+
+                var pageActivitiesStream = _httpClient.GetStreamAsync($"{ActivitiesUri}{await tokenParameters.ToQueryStringAsync()}");
+                var pageActivities = await JsonSerializer.DeserializeAsync<IEnumerable<Activity>>(await pageActivitiesStream);
+
+                activities.AddRange(pageActivities);
+
+                pageHasActivities = pageActivities.Any();
+                page++;
+            }
 
             return activities;
         }
