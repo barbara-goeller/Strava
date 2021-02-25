@@ -4,6 +4,7 @@
     using ChartJs.Blazor;
     using ChartJs.Blazor.PieChart;
     using Microsoft.AspNetCore.Components;
+    using Strava.Extensions;
     using Strava.Models;
     using Strava.Services;
     using System;
@@ -19,9 +20,9 @@
         [Inject]
         public IChartService ChartService { get; set; }
 
-        DateTimeOffset? StartDate { get; set; } = DateTime.Today.AddMonths(-1);
+        DateTimeOffset? StartDate { get; set; } = DateTime.Today.FirstDayOfMonth();
 
-        DateTimeOffset? EndDate { get; set; } = DateTime.Today.AddDays(1).AddTicks(-1);
+        DateTimeOffset? EndDate { get; set; } = DateTime.Today.LastDayOfMonth();
 
         public IEnumerable<Activity> UserActivities { get; set; }
 
