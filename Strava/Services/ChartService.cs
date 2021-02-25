@@ -78,7 +78,7 @@
         // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.brushes?view=net-5.0
         public static readonly Color Red = Color.Red;
         public static readonly Color Orange = Color.Orange;
-        public static readonly Color Yellow = Color.Yellow;
+        public static readonly Color Yellow = Color.Gold;
         public static readonly Color Green = Color.Green;
         public static readonly Color Blue = Color.Blue;
         public static readonly Color Purple = Color.Purple;
