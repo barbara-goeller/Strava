@@ -24,7 +24,9 @@ else
     <div class="container-fluid mb-4" style="height: 25vh">
         <div class="row">
             <div class="col text-center">Count of activities: @_activityCount</div>
-            <div class="col text-center">Overall duration: @TimeSpan.FromMinutes(_totalDuration).ToString(@"hh\:mm\:ss") </div>
+            <div class="col text-center">
+                Overall duration: @string.Format("{0:%d} days {0:%h} hours {0:%m} minutes", TimeSpan.FromMinutes(_totalDuration))
+            </div>
             <div class="col text-center">Overall distance: @_totalDistance.ToString("0.00") km</div>
             <div class="col text-center">
                 AIT-Challenge distance: @_aitLaufChallengeDistance.ToString("0.00") km
@@ -66,7 +68,7 @@ else
                 <td>@context.Name</td>
                 <td>@context.Type</td>
                 <td>@context.Distance.ToString("0.00") km</td>
-                <td>@TimeSpan.FromMinutes(context.MovingTime).ToString(@"hh\:mm\:ss")</td>
+                <td>@string.Format("{0:%h} h {0:%m} m", TimeSpan.FromMinutes(context.MovingTime))</td>
                 <td>@TimeSpan.FromMinutes(context.AverageSpeed).ToString(@"mm\:ss") /km </td>
             </tr>
         </ItemDisplay>
